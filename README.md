@@ -13,6 +13,7 @@ A powerful, intuitive tool for generating CSS `clamp()` functions with real-time
 - **📋 One-click Copy** - Copy generated CSS with a single click
 - **💾 Project Management** - Save and organize your clamp configurations
 - **⚙️ Flexible Units** - Support for rem, px, and em units
+- **🔄 Px to Rem Conversion** - Input values in px, but generate clamp() with rem units for better accessibility
 - **🎯 Viewport Control** - Customize min/max screen widths
 - **🔄 Smart Presets** - Quick access to common configurations
 - **⚡ Lightning Fast** - Built with Vue.js and TypeScript for optimal performance
