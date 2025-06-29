@@ -1,0 +1,99 @@
+@import './base.css';
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 12px;
+    color: #374151;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25;
+}
+
+.input-helper {
+    font-size: 0.8125rem;
+    color: #6b7280;
+    margin-top: 8px;
+    line-height: 1.4;
+}
+
+.form-section-bg {
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.info-card {
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.info-card--gradient {
+    background: linear-gradient(135deg, #ddd6fe, #e0e7ff);
+    border-color: #c4b5fd;
+}
+
+.subsection-title {
+    margin: 0 0 16px 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.input-grid--single {
+    grid-template-columns: 1fr;
+}
+
+.info-text {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.info-text--small {
+    font-size: 0.8125rem;
+}
+
+@media (max-width: 768px) {
+    .input-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .form-section-bg {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 640px) {
+    .info-card {
+        padding: 12px;
+    }
+
+    .info-text {
+        font-size: 0.8125rem;
+    }
+
+    .info-text--small {
+        font-size: 0.75rem;
+    }
+}
