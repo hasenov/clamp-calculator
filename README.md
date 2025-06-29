@@ -33,7 +33,7 @@ The `clamp()` function takes three parameters:
 clamp(minimum, preferred, maximum)
 ```
 
-Our calculator generates the perfect `preferred` value using linear interpolation between your viewport breakpoints, ensuring smooth scaling across all screen sizes.
+The calculator generates the perfect `preferred` value using linear interpolation between your viewport breakpoints, ensuring smooth scaling across all screen sizes.
 
 ## 🎯 Use Cases
 
