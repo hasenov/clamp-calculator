@@ -12,6 +12,7 @@ A powerful, intuitive tool for generating CSS `clamp()` functions with real-time
 - **📋 One-click Copy** - Copy generated CSS with a single click
 - **💾 Project Management** - Save and organize your clamp configurations
 - **📤📥 Import/Export Projects** - Import and export your projects as JSON files
+- **💾 Auto-Save** - Projects automatically saved to browser's local storage
 - **⚙️ Flexible Units** - Support for rem, px, and em units
 - **🔄 Px to Rem Conversion** - Input values in px, but generate clamp() with rem units for better accessibility
 - **🎯 Viewport Control** - Customize min/max screen widths
@@ -33,7 +34,7 @@ The `clamp()` function takes three parameters:
 clamp(minimum, preferred, maximum)
 ```
 
-Calculator generates the perfect `preferred` value using linear interpolation between your viewport breakpoints, ensuring smooth scaling across all screen sizes.
+It generates the perfect `preferred` value using linear interpolation between your viewport breakpoints, ensuring smooth scaling across all screen sizes.
 
 ## 🎯 Use Cases
 
