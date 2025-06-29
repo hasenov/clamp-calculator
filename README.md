@@ -1,33 +1,80 @@
-# .
+# CSS Clamp Calculator
 
-This template should help get you started developing with Vue 3 in Vite.
+🎯 **Create perfect responsive values for modern web development**
 
-## Recommended IDE Setup
+A powerful, intuitive tool for generating CSS `clamp()` functions with real-time preview and advanced project management features.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🚀 [Live Demo](https://hasenov.github.io/clamp-calculator/)
 
-## Type Support for `.vue` Imports in TS
+## ✨ Features
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- **🎨 Real-time Preview** - See your clamp values in action instantly
 
-## Customize configuration
+- **📋 One-click Copy** - Copy generated CSS with a single click
+- **💾 Project Management** - Save and organize your clamp configurations
+- **⚙️ Flexible Units** - Support for rem, px, and em units
+- **🎯 Viewport Control** - Customize min/max screen widths
+- **🔄 Smart Presets** - Quick access to common configurations
+- **⚡ Lightning Fast** - Built with Vue.js and TypeScript for optimal performance
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## 🛠️ How It Works
+
+1. **Set Your Range** - Define minimum and maximum viewport widths
+2. **Choose Values** - Set your desired minimum and maximum values
+3. **Select Units** - Pick from rem, px, or em units
+4. **Get Your Code** - Copy the generated `clamp()` function
+5. **Use in CSS** - Apply directly to your stylesheets
+
+## 📖 Understanding CSS Clamp
+
+The `clamp()` function takes three parameters:
+
+```css
+clamp(minimum, preferred, maximum)
+```
+
+Our calculator generates the perfect `preferred` value using linear interpolation between your viewport breakpoints, ensuring smooth scaling across all screen sizes.
+
+## 🎯 Use Cases
+
+- **Typography** - Responsive font sizes that scale naturally
+- **Spacing** - Margins and paddings that adapt to screen size
+- **Layout** - Container widths and component sizing
+- **Design System** - Consistent scaling across your entire project
+
+## 🛠️ Tech Stack
+
+- **Vue.js 3** - Modern reactive framework
+- **TypeScript** - Type-safe JavaScript
+- **Vite** - Lightning-fast build tool
+- **PrimeVue** - Rich UI component library
 
 ## Project Setup
 
-```sh
+```
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+**Compile and Hot-Reload for Development**
 
-```sh
+```
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+**Type-Check, Compile and Minify for Production**
 
-```sh
+```
 npm run build
 ```
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📞 Contact
+
+**Hasenov** - [@hasenov](https://github.com/hasenov)
+
+---
+
+⭐ **Star this repo if it helped you!** ⭐
