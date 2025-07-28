@@ -7,11 +7,11 @@ export class NumberFormatterService {
         }
         const multiplier = Math.pow(10, precision)
         const rounded = Math.round(num * multiplier) / multiplier
-        // Если целое — возвращаем как есть
+
         if (Number.isInteger(rounded)) {
             return rounded.toString()
         }
-        // Если дробное — убираем только лишние нули после запятой
+
         return rounded
             .toString()
             .replace(/(\.\d*?[1-9])0+$/, '$1')
