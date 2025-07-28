@@ -5,13 +5,17 @@ export class NumberFormatterService {
         if (!isFinite(num)) {
             return '0'
         }
-
-        // Round to specified decimal places to avoid floating point precision issues
         const multiplier = Math.pow(10, precision)
         const rounded = Math.round(num * multiplier) / multiplier
-
-        // Convert to string and remove trailing zeros
-        return rounded.toString().replace(/\.?0+$/, '')
+        // Если целое — возвращаем как есть
+        if (Number.isInteger(rounded)) {
+            return rounded.toString()
+        }
+        // Если дробное — убираем только лишние нули после запятой
+        return rounded
+            .toString()
+            .replace(/(\.\d*?[1-9])0+$/, '$1')
+            .replace(/\.0+$/, '')
     }
 
     static formatCssValue(value: number, unit: string): string {
