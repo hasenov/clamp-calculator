@@ -50,9 +50,8 @@ const handleParse = (clampString: string) => {
 
         <div class="help-text">
             <p>
-                💡 <strong>Tip:</strong> Click on the result above to edit it directly, or paste any
-                clamp() function to automatically update all inputs! Make sure to set correct Root
-                Font Size.
+                💡 <strong>Tip:</strong> Paste any clamp() function to automatically update all
+                inputs! Make sure to set correct Root Font Size.
             </p>
         </div>
     </BaseFormSection>
