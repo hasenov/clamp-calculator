@@ -3,6 +3,7 @@ import { CSSUnit, RootFontSize } from '../types/clamp.types'
 import { ValueParserService } from './valueParser.service'
 import { UnitConverterService } from './unitConverter.service'
 import { LoggerService } from './logger.service'
+import { DEVICE_WIDTH_LIMITS } from '../constants/ui.constants'
 
 export interface ParsedClampFunction {
     isValid: boolean
@@ -88,20 +89,51 @@ export class ClampParserService {
                 rootFontSize,
             )
 
-            if (minDevice >= maxDevice || minDevice < 200 || maxDevice > 5000) {
+            LoggerService.debug('Calculated device widths', 'ClampParser', {
+                minDevice,
+                maxDevice,
+                vwCoefficient,
+                constantValue,
+                constantUnit,
+            })
+
+            if (minDevice >= maxDevice) {
+                LoggerService.warn('Min device width >= Max device width', 'ClampParser', {
+                    minDevice,
+                    maxDevice,
+                })
+                return {
+                    isValid: false,
+                    errorMessage: 'Min device width must be less than max device width',
+                }
+            }
+
+            // Check absolute bounds for parsing (UI validation applies later)
+            if (
+                minDevice < DEVICE_WIDTH_LIMITS.MIN_DEVICE.min ||
+                maxDevice > DEVICE_WIDTH_LIMITS.MAX_DEVICE.max
+            ) {
                 LoggerService.warn(
-                    'Calculated device widths are out of valid range',
+                    'Calculated device widths are outside reasonable range',
                     'ClampParser',
                     {
                         minDevice,
                         maxDevice,
+                        limits: {
+                            minAllowed: DEVICE_WIDTH_LIMITS.MIN_DEVICE.min,
+                            maxAllowed: DEVICE_WIDTH_LIMITS.MAX_DEVICE.max,
+                        },
                     },
                 )
                 return {
                     isValid: false,
-                    errorMessage: 'Calculated device widths are out of valid range',
+                    errorMessage: `Calculated device widths are outside reasonable range (${DEVICE_WIDTH_LIMITS.MIN_DEVICE.min}px - ${DEVICE_WIDTH_LIMITS.MAX_DEVICE.max}px)`,
                 }
             }
+
+            // Round values for better UX
+            const roundedMinValue = Math.round(minValue.number * 1000) / 1000
+            const roundedMaxValue = Math.round(maxValue.number * 1000) / 1000
 
             const result = {
                 isValid: true,
@@ -109,14 +141,20 @@ export class ClampParserService {
                     rootFontSize,
                     minDevice,
                     maxDevice,
-                    minValue: minValue.number.toString(),
-                    maxValue: maxValue.number.toString(),
+                    minValue: roundedMinValue.toString(),
+                    maxValue: roundedMaxValue.toString(),
                     unit: minValue.unit,
                     convertToRem: false,
                 },
             }
 
-            LoggerService.info('Clamp function parsed successfully', 'ClampParser', result.config)
+            LoggerService.info('Clamp function parsed successfully', 'ClampParser', {
+                ...result.config,
+                originalMinValue: minValue.number,
+                originalMaxValue: maxValue.number,
+                roundedMinValue,
+                roundedMaxValue,
+            })
             return result
         } catch (error) {
             LoggerService.error('Clamp parsing error', 'ClampParser', error)
@@ -153,10 +191,27 @@ export class ClampParserService {
                 baseFontSize,
             ) * Math.sign(constantValue)
 
-        const minDevice = (minPx - constantPx) / vwCoefficient
-        const maxDevice = (maxPx - constantPx) / vwCoefficient
+        // Calculate device widths: minPx = vwCoefficient * minDevice + constantPx
+        const minDevice = (minPx - constantPx) / (vwCoefficient / 100)
+        const maxDevice = (maxPx - constantPx) / (vwCoefficient / 100)
 
-        return { minDevice, maxDevice }
+        // Round for UI display
+        const roundedMinDevice = Math.round(minDevice)
+        const roundedMaxDevice = Math.round(maxDevice)
+
+        LoggerService.debug('Device width calculation details', 'ClampParser', {
+            minPx,
+            maxPx,
+            constantPx,
+            vwCoefficient,
+            vwCoefficientDiv100: vwCoefficient / 100,
+            minDevice,
+            maxDevice,
+            roundedMinDevice,
+            roundedMaxDevice,
+        })
+
+        return { minDevice: roundedMinDevice, maxDevice: roundedMaxDevice }
     }
 
     private static parseValuePart(part: string): ParsedValue | null {

@@ -13,16 +13,21 @@ export const ROOT_FONT_SIZE_OPTIONS: RadioOption[] = [
     },
 ] as const
 
+/**
+ * Device width limits for clamp functions
+ * Note: These limits apply only to UI validation for manual input.
+ * Parsing uses absolute bounds (100px - 10000px).
+ */
 export const DEVICE_WIDTH_LIMITS = {
     MIN_DEVICE: {
-        min: 200,
-        max: 1200,
-        default: 320,
+        min: 100, // Mobile device minimum width
+        max: 2000, // Maximum width for min device
+        default: 320, // Standard mobile width
     },
     MAX_DEVICE: {
-        min: 800,
-        max: 5000,
-        default: 1366,
+        min: 400, // Minimum width for max device
+        max: 10000, // Maximum device width (large screens)
+        default: 1366, // Standard desktop width
     },
 } as const
 

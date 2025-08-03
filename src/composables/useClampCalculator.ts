@@ -17,7 +17,6 @@ export interface ClampCalculatorReturn {
 export function useClampCalculator(config: ClampConfig): ClampCalculatorReturn {
     LoggerService.debug('Initializing clamp calculator', 'ClampCalculator')
 
-    // Create reactive object with only validatable fields
     const validatableConfig = computed(() => ({
         minDevice: config.minDevice,
         maxDevice: config.maxDevice,
@@ -25,7 +24,6 @@ export function useClampCalculator(config: ClampConfig): ClampCalculatorReturn {
         maxValue: config.maxValue,
     }))
 
-    // Use validation composable for validatable fields only
     const { errors, hasErrors, validate } = useValidation(
         validatableConfig,
         clampValidationSchema,
@@ -36,7 +34,6 @@ export function useClampCalculator(config: ClampConfig): ClampCalculatorReturn {
         },
     )
 
-    // Computed clamp result with memoization
     const clampResult = computed(() => {
         if (hasErrors.value) {
             LoggerService.debug(
@@ -68,14 +65,12 @@ export function useClampCalculator(config: ClampConfig): ClampCalculatorReturn {
         }
     })
 
-    // Reset to default values
     const resetToDefaults = (): void => {
         LoggerService.info('Resetting calculator to defaults', 'ClampCalculator')
         const defaultConfig = ClampCalculatorService.getDefaultConfig()
         Object.assign(config, defaultConfig)
     }
 
-    // Watch for configuration changes and re-validate
     watch(
         validatableConfig,
         () => {
@@ -96,7 +91,6 @@ export function useClampCalculator(config: ClampConfig): ClampCalculatorReturn {
                 'ClampCalculator',
                 result.config,
             )
-            // Update config with parsed values while preserving current rootFontSize
             Object.assign(config, {
                 ...result.config,
                 rootFontSize: config.rootFontSize,

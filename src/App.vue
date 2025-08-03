@@ -62,7 +62,6 @@ const handleParse = (clampString: string) => {
     parseClampFunction(clampString)
 }
 
-// Error handling utilities
 const handleError = (error: Error, operation: string) => {
     LoggerService.error(`Error during ${operation}`, 'App', error)
     NotificationService.showError(error.message)
@@ -75,8 +74,6 @@ const showSuccess = (message: string) => {
 const resetConfigToDefaults = () => {
     Object.assign(config, ClampCalculatorService.getDefaultConfig())
 }
-
-// Project management handlers
 const handleProjectCreate = async (projectName: string) => {
     try {
         const project = createProject({ name: projectName })
@@ -113,7 +110,6 @@ const handleProjectDelete = async (projectId: string) => {
     }
 }
 
-// Preset management handlers
 const handlePresetCreate = async (presetName: string) => {
     try {
         if (!currentProject.value) return
